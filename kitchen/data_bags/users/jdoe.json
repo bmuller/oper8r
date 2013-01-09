@@ -1,0 +1,7 @@
+{
+  "id": "jdoe",
+  "ssh_keys": "ssh-rsa AAAAB3NzaC1yc....",
+  "groups": [ "sysadmin" ],
+  "uid": 1001,
+  "shell": "\/bin\/bash"
+}

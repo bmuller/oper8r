@@ -1,0 +1,12 @@
+{
+   "name": "db",
+   "default_attributes": {
+   },
+   "override_attributes": { },
+   "json_class": "Chef::Role",
+   "description": "This is the role used by all web db boxen.",
+   "chef_type": "role",
+   "run_list": [
+      "sane::db"
+   ]
+}
