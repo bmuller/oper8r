@@ -12,6 +12,7 @@ unless target.nil?
 end
 
 set :user, "ubuntu"
+set :rubygems_version, "1.8.24"
 ssh_options[:keys] = Dir["./keys/*.pem"]
 
 namespace :chef do
@@ -27,8 +28,8 @@ namespace :chef do
 
   desc "set hostname based on target name"
   task :set_hostname, :roles => :target do
-    run "sudo echo \"127.0.0.1     #{target}\" >> /etc/hosts"
-    sudo "echo #{target} > /etc/hostname"
+    run "sudo su -c 'echo \"127.0.0.1     #{target}\" >> /etc/hosts'"
+    run "sudo su -c 'echo #{target} > /etc/hostname'"
     sudo "hostname #{target}"
   end
 
@@ -46,10 +47,11 @@ namespace :chef do
   desc "Install ruby 1.9.1 and ruby gems"
   task :install_ruby, :roles => :target do
     sudo "DEBIAN_FRONTEND=noninteractive apt-get -y install ruby1.9.1-dev automake make"
+    rgems = "rubygems-#{rubygems_version}"
     ["rm -rf rubygems*", 
-     "wget -q http://production.cf.rubygems.org/rubygems/rubygems-1.8.22.tgz", 
-     "tar -zxf rubygems-1.8.22.tgz"].each { |cmd| run "cd /usr/src && sudo #{cmd}" }
-    run "cd /usr/src/rubygems-1.8.22 && sudo ruby setup.rb"
+     "wget -q http://production.cf.rubygems.org/rubygems/#{rgems}.tgz", 
+     "tar -zxf #{rgems}.tgz"].each { |cmd| run "cd /usr/src && sudo #{cmd}" }
+    run "cd /usr/src/#{rgems} && sudo ruby setup.rb"
   end
 
   desc "Install necessary gems"
