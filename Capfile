@@ -12,7 +12,7 @@ unless target.nil?
 end
 
 set :user, "ubuntu"
-set :rubygems_version, "1.8.24"
+set :rubygems_version, "2.0.3"
 ssh_options[:keys] = Dir["./keys/*.pem"]
 
 namespace :chef do
@@ -44,9 +44,9 @@ namespace :chef do
     sudo "service ssh restart"
   end
 
-  desc "Install ruby 1.9.1 and ruby gems"
+  desc "Install ruby 1.9.3 and ruby gems"
   task :install_ruby, :roles => :target do
-    sudo "DEBIAN_FRONTEND=noninteractive apt-get -y install ruby1.9.1-dev automake make"
+    sudo "DEBIAN_FRONTEND=noninteractive apt-get -y install ruby1.9.3 ruby-dev automake make"
     rgems = "rubygems-#{rubygems_version}"
     ["rm -rf rubygems*", 
      "wget -q http://production.cf.rubygems.org/rubygems/#{rgems}.tgz", 
