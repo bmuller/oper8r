@@ -1,3 +1,5 @@
+**DEPRECATED** - see [toquen](https://github.com/bmuller/toquen) for a suitable (and awesome) replacement.
+
 # Oper8r: Chef Solo Setup
 This is a basic skeleton for setting up a chef solo deployment service.  You should have at least one running Ubuntu-based Amazon instance (though you don't need to do anything other than spin it up).
 
